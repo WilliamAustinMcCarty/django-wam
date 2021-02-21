@@ -4,9 +4,12 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
+
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
+    <li><a href="{% url 'polls:thoughts' %}">{{'Thoughts on Polls? If so click here to give them.'}}</a></li>
     </ul>
 {% else %}
     <p>No polls are available.</p>
+    <li><a href='{% url 'polls:thoughts' %}>{{'Thoughts on Polls? If so click here to give them.'}}</a></li>
 {% endif %}
