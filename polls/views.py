@@ -35,16 +35,13 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-class ThoughtsView(generic.ListView):
-    model = Thoughts
-    template_name = 'polls/thoughts.html'
+#class ThoughtsView(generic.ListView):
+ #   model = Thoughts
+  #  template_name = 'polls/thoughts.html'
     # get all of the thoughts
-    def get_queryset(self):
-        return Thoughts.objects.all()
+   # def get_queryset(self):
+    #    return Thoughts.objects.all()
 
-
-#def thoughts(request):
-#    return HttpResponse('<h1>test</h1>')
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -65,4 +62,23 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
+thoughtPosts = [
+    {
+        'title': 'first title',
+        'thought_text': 'first text'
+    },
+    {
+        'title': 'second title',
+        'thought_text': 'second text'
+    }
+]
+
+
+
+
+def thoughts(request):
+    thoughtList = {
+        'allThoughts': thoughtPosts
+    }
+    return render(request, 'polls/thoughts.html', thoughtList)
 
