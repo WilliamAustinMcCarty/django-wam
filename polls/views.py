@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .models import Choice, Question
+from .models import Choice, Question, Thoughts
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -35,6 +35,13 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+class ThoughtsView(generic.DetailView):
+    model = Thoughts
+    template_name = 'polls/thoughts.html'
+    # get all of the thoughts
+    def get_queryset(self):
+        return Thoughts.objects.all()
+
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -52,3 +59,6 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+
