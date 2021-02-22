@@ -17,7 +17,7 @@ class Question(models.Model):
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
-    
+
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
@@ -25,3 +25,10 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+class Thoughts(models.Model):
+    thought_text = models.CharField(max_length=200)
+    post_date = models.DateTimeField('date posted')
+
+    def __str__(self):
+        return self.thought_text
