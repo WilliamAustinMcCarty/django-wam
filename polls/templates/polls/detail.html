@@ -1,13 +1,46 @@
-<h1>{{ question.question_text }}</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-{% endfor %}
-<input type="submit" value="Vote">
-</form>
-<li><a href="{% url 'polls:thoughts' %}">{{'Thoughts on Polls? If so click here to give them.'}}</a></li>
+<!doctype html>
+<html lang="en">
+      <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <title>Question</title>
+      </head>
+      <header>
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand">Question</a>
+                <form class="form-inline">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+      </header>
+      <body>
+        <h1>{{ question.question_text }}</h1>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <form action="{% url 'polls:vote' question.id %}" method="post">
+          {% csrf_token %}
+          {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+          {% endfor %}
+          <input type="submit" value="Vote">
+        </form>
+        <form action="{% url 'polls:thoughts'%}">
+          {% csrf_token %}
+          <input type="submit" value="Thoguhts on Polls?">
+        </form>
+      </body>
+      <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+          Header:
+          © 2021 Copyright:
+          <a class="text-dark" href="https://getbootstrap.com/"> getbootstrap.com.<br /></a>
+          Footer:
+          © 2020 Copyright:
+          <a class="text-dark" href="https://mdbootstrap.com/"> MDBootstrap.com.<br /></a>
+          Overall:
+          @ 2021 Copyright: William McCarty
+        </div>
+      </footer>
+</html>
