@@ -15,57 +15,31 @@
                 </form>
             </nav>
       </header>
-
-
-
-
-
       <body>
-          {% if allThoughts %}
-            <h1>"test"</h1>
-          {% else %}
-            <h1>"fail"</h1>
-          {% endif %}
-
-          {% for tho in allThoughts %}
-            <h1>{{tho.title}}</h1>
-            <h1>{{tho.thought_text}}</h1>
-          {% endfor %}
-
-
-          {% if thoughts.get_queryset.all %}
-            <h1>""</h1>
-          {% endif %}
-
-          <form action="{% url 'polls:thoughts'%}">
+            {% if allThoughts %}
+              {% for tho in allThoughts %}
+                <h2>{{tho.title}}</h2>
+                <p>{{tho.thought_text}}</p>
+              {% endfor %}
+            {% else %}
+              <h1>"fail"</h1>
+            {% endif %}
+            <form action="{% url 'polls:thoughts'%}">
               <lable for="ntitle">Title:</label>
               <input type="text" id ="ntitle" name="ntitle"><br><br>
               <label for="ntext">Text:</label>
               <input type="text" id ="ntext" name="ntext"><br><br>
               <input type="submit" value="Submit Thought"><br><br>
-          </form>
-
-
-          <!--
-            {% for tho in allThoughts %}
-              <h1>{{tho.title}}</h1>
-              <h1>{{tho.thought_text}}</h1>
-
-            {% endfor %}
-
-          -->
+            </form>
+            <form action="{% url 'polls:index'%}">
+              {% csrf_token %}
+              <input type="submit" value="Return Home?">
+            </form>
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-        <form action="{% url 'polls:index'%}">
-          {% csrf_token %}
-          <input type="submit" value="Return Home?">
-        </form>
       </body>
       <footer class="bg-light text-center text-lg-start">
-        <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
           Header:
           © 2021 Copyright:
@@ -76,13 +50,5 @@
           Overall:
           @ 2021 Copyright: William McCarty
         </div>
-        <!-- Copyright -->
       </footer>
-
-
-
-
-
-
-
 </html>
